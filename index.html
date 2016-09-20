@@ -1,1 +1,52 @@
-butter
+<!DOCTYPE html>
+<html >
+    <head>
+        <meta charset="UTF-8">
+        <title>Knowledge Engine</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css">
+        <style>body{padding:100px 10px 30px}h1{max-height:80px;margin-bottom:26px;font-family:Serif;font-size:5.5em;text-align:center}footer{margin-top:30px}#results-title{margin-bottom:20px}.form-control:focus{border-color:none;box-shadow:none;outline:0}.btn:focus{outline:0}.github-wrap{vertical-align:middle;position:relative;top:4px}</style>
+    </head>
+    <body>
+      <nav class="navbar navbar-default navbar-fixed-top">
+          <a class="navbar-brand" href="https://github.com/turbo/KnowledgeEngine">Knowledge Engine</a>
+          <ul class="nav navbar-nav">
+            <li class="active "><a href = "#">Search</a></li>
+            <li><a href = "/map">Map</a></li>
+            <li><a href = "https://github.com/turbo/KnowledgeEngine">About</a></li>
+          </ul>
+    </nav>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <h1>What is ...?</h1>
+                    <div id="form-container" class="center-block">
+                        <form class="input-group" action="javascript:performRequest()">
+                            <span class="input-group-btn">
+                                <select id="langsel" class="selectpicker" data-live-search="true" data-placement="top" title="Language: English (English)"></select>
+                            </span>
+                            <input autofocus id="searchbar" type="search" class="form-control" placeholder="search for...">
+                            <span class="input-group-btn">
+                                <button id="btnsearch" class="btn" type="submit" data-toggle="tooltip" data-placement="top">Compute</button>
+                            </span>
+                        </form>
+                    </div>
+                    <h3 id="results-title" class="text-center"></h3>
+                    <div id="results-list" class="list-group"></div>
+                    <footer class="text-center"><span class="github-wrap"><a class="github-button" href="https://github.com/turbo/alwsl" data-count-href="/turbo/alwsl/stargazers" data-count-api="/repos/turbo/KnowledgeEngine#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star turbo/alwsl on GitHub">Star</a></span> &bull; trend-based knowledge engine &bull; <span class="github-wrap"><a class="github-button" href="https://github.com/turbo/KnowledgeEngine/issues" data-icon="octicon-issue-opened" aria-label="Issue turbo/alwsl on GitHub">Issue</a></span></footer>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+        <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+        <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
+        <script src="things.js"></script>
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+    </body>
+</html>
