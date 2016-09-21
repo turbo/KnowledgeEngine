@@ -73,7 +73,7 @@ $(document).ready(function() {
 });
 
 function reflectURL() {
-    window.history.pushState({}, "dataurl", baseURL + ((locale !== "en-US") ? 'l=' + encodeURIComponent(locale) : '') + ($("#searchbar").val() != "" ? '&q=' + encodeURIComponent($("#searchbar").val()) : ''));
+    window.history.pushState({}, "dataurl", baseURL + ($("#searchbar").val() != "" ? '&q=' + encodeURIComponent($("#searchbar").val()) : '') + ((locale !== "en-US") ? '&l=' + encodeURIComponent(locale) : ''));
 }
 
 function getURLParameter(name) {
