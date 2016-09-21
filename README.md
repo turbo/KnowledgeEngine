@@ -22,6 +22,8 @@ definition
 
 The engine abstracts the entity into an idea. For every idea the engine knows about, there is a respective category (which might be a sub-category of something else). This is the actual result. The definition is just a bit of fun. It is retrieved client-side, using the idea as a search term in a request to Wikipedia's search API.
 
+There's an issue right now where some definitions are severely disconnected from the idea that was searched for, causing hilarious mis-attributions.
+
 A category defaults to "Topic" if the idea is *more* relevant as a conversation topic on the internet than it fits into any category.
 
 ### Internationalization
