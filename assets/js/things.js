@@ -41,28 +41,28 @@ var defCache = [];
 
 $(document).ready(function() {
     $("#results-list").hide();
-    
+
     var tkey = getURLParameter('q');
     if (tkey !== null) {
         $("#searchbar").val(tkey);
         console.log("Data: " + tkey);
         performRequest(false);
     }
-    
+
     $("#searchbar").on('input', reflectURL);
-    
+
     var tlocale = getURLParameter('l');
     if (tlocale !== null) locale = tlocale;
-    
+
     for (var i = 0; i < localedb.length; i++) {
         $("#langsel").append('<option value="' + localedb[i].locale + '">' + localedb[i].native + ' (' + localedb[i].lang + ')</option>');
-        
+
         if (tlocale !== null && localedb[i].locale == tlocale) {
             $("#langsel").attr("title", localedb[i].native);
             $("#langsel").val(localedb[i].locale);
         }
     }
-    
+
     $("#langsel").change(function() {
         for (var i = 0; i < localedb.length; i++) {
             if (localedb[i].locale == $('#langsel').val()) locale = localedb[i].locale;
@@ -73,7 +73,7 @@ $(document).ready(function() {
 });
 
 function reflectURL() {
-    window.history.pushState({}, "dataurl", baseURL + 'l=' + encodeURIComponent(locale) + ($("#searchbar").val() != "" ? '&q=' + encodeURIComponent($("#searchbar").val()) : ''));
+    window.history.pushState({}, "dataurl", baseURL + ((locale !== "en-US") ? '' : 'l=' + encodeURIComponent(locale)) + ($("#searchbar").val() != "" ? '&q=' + encodeURIComponent($("#searchbar").val()) : ''));
 }
 
 function getURLParameter(name) {
@@ -82,47 +82,47 @@ function getURLParameter(name) {
 
 function performRequest(u) {
     if($("#searchbar").val().length < 2) return $("#searchbar").focus();
-    
+
     defCache = [];
-    if (u) reflectURL();        
+    if (u) reflectURL();
     searchString = $("#searchbar").val();
     $("#results-list").hide(200);
     $("#results-title").text("");
     $("#results-list").html("");
-        
-    $.getJSON("https://labs.turbo.run/api/v1/misc/what?q=" + searchString + "&l=" + locale, function( data ) {                
+
+    $.getJSON("https://labs.turbo.run/api/v1/misc/what?q=" + searchString + "&l=" + locale, function( data ) {
         var confidence = data.length;
 
         if (confidence == 0) {
             $("#results-title").text("I don't know.");
         }
-        
+
         for (var i = 0; i < confidence; i++) {
             $("#results-list").append(
-                '<a id="ref_' + i + '" href="" target="blank_" class="list-group-item ' + 
-                (i == 0 ? 'active' : '') + 
-                '">' + 
-                '<h4 class="list-group-item-heading"><b>' + 
-                data[i].title + 
-                '</b> <small>( ' + data[i].type + ' )</small></h4>' + 
+                '<a id="ref_' + i + '" href="" target="blank_" class="list-group-item ' +
+                (i == 0 ? 'active' : '') +
+                '">' +
+                '<h4 class="list-group-item-heading"><b>' +
+                data[i].title +
+                '</b> <small>( ' + data[i].type + ' )</small></h4>' +
                 '<p id="desc_' + i + '" class="list-group-item-text"></p></a>'
             );
-            
+
             getDefinition(data[i], locale.substring(0, 2), i);
         }
-        
+
         $("#results-list").show(200);
     });
 }
 
 function getDef(data, i) {
     if (data[2].length == 0) return "That's all I know.";
-    
+
     var def = data[2][0];
     for (var k = 0; k < defCache.length; k++) {
         if (defCache[k] == def && data[2].length > 1) def = data[2][1];
     }
-    
+
     defCache[i] = def;
     return (def.length > 10 ? def : "I don't know. Click to learn more.");
 }
@@ -138,8 +138,8 @@ function getDefinition(topic, lang, id) {
         },
         dataType: 'json',
         type: 'GET',
-        headers: { 
-            'Api-User-Agent': 'TurboAPI/1.0 - git.io/minxomat' 
+        headers: {
+            'Api-User-Agent': 'TurboAPI/1.0 - git.io/minxomat'
         },
         success: function(data) {
             $('#desc_' + id).html(getDef(data, id));
