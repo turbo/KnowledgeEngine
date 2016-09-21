@@ -46,7 +46,6 @@ $(document).ready(function() {
     if (tkey !== null) {
         $("#searchbar").val(tkey);
         console.log("Data: " + tkey);
-        performRequest(false);
     }
 
     $("#searchbar").on('input', reflectURL);
@@ -62,6 +61,8 @@ $(document).ready(function() {
             $("#langsel").val(localedb[i].locale);
         }
     }
+
+	if (tkey !== null) performRequest(false);
 
     $("#langsel").change(function() {
         for (var i = 0; i < localedb.length; i++) {
